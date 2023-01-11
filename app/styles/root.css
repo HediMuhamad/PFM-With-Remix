@@ -50,12 +50,20 @@ body .app-container .slidebar .navlink {
   text-transform: capitalize;
   color: #d4d4d8;
   text-decoration: none;
+  font-weight: 400;
 }
 body .app-container .slidebar .navlink[aria-current=page] {
   color: #ffffff !important;
 }
 body .app-container .topbar {
-  background-color: #7fb069;
+  background-color: #f7f4f3;
+  padding: 25px;
+}
+body .app-container .topbar span {
+  font-size: 22px;
+  text-transform: capitalize;
+  color: #374151;
+  font-weight: 500;
 }
 body .app-container .main {
   background-color: #ffffff;

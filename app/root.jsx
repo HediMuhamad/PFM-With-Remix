@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react"
 
 import rootStyles from "~/styles/root.css"
@@ -31,6 +32,18 @@ export const meta = () => ({
 })
 
 function AppContainer() {
+  let path = useLocation().pathname.split("/")[1]
+  path = "/" + path
+
+  const pageDetails = {
+    "/": {
+      title: "overview",
+    },
+    "/transactions": {
+      title: "transaction history",
+    },
+  }
+
   return (
     <div className="app-container">
       <nav className="slidebar">
@@ -38,13 +51,15 @@ function AppContainer() {
           <AppLogo />
         </NavLink>
         <NavLink className={"navlink"} to={"/"}>
-          Overview
+          {pageDetails["/"].title}
         </NavLink>
         <NavLink className={"navlink"} to={"/transactions"}>
-          Transaction History
+          {pageDetails["/transactions"].title}
         </NavLink>
       </nav>
-      <div className="topbar"></div>
+      <div className="topbar">
+        <span>{pageDetails[path].title}</span>
+      </div>
       <main className="main">
         <Outlet />
       </main>
