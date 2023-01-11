@@ -1,9 +1,12 @@
 .index-page {
   font-family: system-ui, sans-serif;
-  width: 100%;
-  height: 100vh;
+  width: 1440px;
+  height: 1024px;
   display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
+  background-color: #ffffff;
+  position: relative;
+  box-shadow: 0px 0px 18px 2px rgba($color: #000000, $alpha: 0.1);
 }

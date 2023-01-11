@@ -1,11 +1,11 @@
-import { PassThrough } from "stream";
+import { PassThrough } from "stream"
 
-import { Response } from "@remix-run/node";
-import { RemixServer } from "@remix-run/react";
-import isbot from "isbot";
-import { renderToPipeableStream } from "react-dom/server";
+import { Response } from "@remix-run/node"
+import { RemixServer } from "@remix-run/react"
+import isbot from "isbot"
+import { renderToPipeableStream } from "react-dom/server"
 
-const ABORT_DELAY = 5000;
+const ABORT_DELAY = 5000
 
 export default function handleRequest(
   request,
@@ -25,7 +25,7 @@ export default function handleRequest(
         responseStatusCode,
         responseHeaders,
         remixContext
-      );
+      )
 }
 
 function handleBotRequest(
@@ -35,38 +35,39 @@ function handleBotRequest(
   remixContext
 ) {
   return new Promise((resolve, reject) => {
-    let didError = false;
+    let didError = false
 
     const { pipe, abort } = renderToPipeableStream(
       <RemixServer context={remixContext} url={request.url} />,
       {
         onAllReady() {
-          const body = new PassThrough();
+          const body = new PassThrough()
 
-          responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("Content-Type", "text/html")
 
           resolve(
             new Response(body, {
               headers: responseHeaders,
               status: didError ? 500 : responseStatusCode,
             })
-          );
+          )
 
-          pipe(body);
+          pipe(body)
         },
         onShellError(error) {
-          reject(error);
+          reject(error)
         },
         onError(error) {
-          didError = true;
+          didError = true
 
-          console.error(error);
+          // eslint-disable-next-line no-console
+          console.error(error)
         },
       }
-    );
+    )
 
-    setTimeout(abort, ABORT_DELAY);
-  });
+    setTimeout(abort, ABORT_DELAY)
+  })
 }
 
 function handleBrowserRequest(
@@ -76,36 +77,37 @@ function handleBrowserRequest(
   remixContext
 ) {
   return new Promise((resolve, reject) => {
-    let didError = false;
+    let didError = false
 
     const { pipe, abort } = renderToPipeableStream(
       <RemixServer context={remixContext} url={request.url} />,
       {
         onShellReady() {
-          const body = new PassThrough();
+          const body = new PassThrough()
 
-          responseHeaders.set("Content-Type", "text/html");
+          responseHeaders.set("Content-Type", "text/html")
 
           resolve(
             new Response(body, {
               headers: responseHeaders,
               status: didError ? 500 : responseStatusCode,
             })
-          );
+          )
 
-          pipe(body);
+          pipe(body)
         },
         onShellError(err) {
-          reject(err);
+          reject(err)
         },
         onError(error) {
-          didError = true;
+          didError = true
 
-          console.error(error);
+          // eslint-disable-next-line no-console
+          console.error(error)
         },
       }
-    );
+    )
 
-    setTimeout(abort, ABORT_DELAY);
-  });
+    setTimeout(abort, ABORT_DELAY)
+  })
 }
