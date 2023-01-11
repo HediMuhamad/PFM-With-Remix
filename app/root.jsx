@@ -2,12 +2,14 @@ import {
   Links,
   LiveReload,
   Meta,
+  NavLink,
   Outlet,
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react"
 
 import rootStyles from "~/styles/root.css"
+import { AppLogo } from "./shared/assets"
 
 /**
  * @returns {import("@remix-run/node").LinkDescriptor[]}
@@ -31,7 +33,17 @@ export const meta = () => ({
 function AppContainer() {
   return (
     <div className="app-container">
-      <nav className="slidebar"></nav>
+      <nav className="slidebar">
+        <NavLink to={"/"}>
+          <AppLogo />
+        </NavLink>
+        <NavLink className={"navlink"} to={"/"}>
+          Overview
+        </NavLink>
+        <NavLink className={"navlink"} to={"/transactions"}>
+          Transaction History
+        </NavLink>
+      </nav>
       <div className="topbar"></div>
       <main className="main">
         <Outlet />

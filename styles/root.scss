@@ -32,7 +32,26 @@ body {
 
     & .slidebar {
       grid-row: span 2;
-      background-color: #ca3c25;
+      padding: 25px 15px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 30px;
+      background: linear-gradient(#30475e, #222831);
+
+      & > :first-child {
+        margin-bottom: 60px;
+      }
+
+      & .navlink {
+        font-size: 22px;
+        text-transform: capitalize;
+        color: #d4d4d8;
+        text-decoration: none;
+      }
+
+      & .navlink[aria-current="page"] {
+        color: #ffffff !important;
+      }
     }
 
     & .topbar {
