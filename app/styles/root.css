@@ -1,3 +1,16 @@
+.navlink {
+  font-size: 22px;
+  text-align: left;
+  text-transform: capitalize;
+  text-decoration: none;
+  color: #d4d4d8;
+  cursor: pointer;
+  display: block;
+}
+.navlink[data-selected=true] {
+  color: #ffffff !important;
+}
+
 * {
   box-sizing: border-box;
   font-family: inherit;
@@ -6,6 +19,7 @@
 }
 
 body {
+  font-family: system-ui, sans-serif;
   width: 100vw;
   height: 100vh;
   display: flex;
