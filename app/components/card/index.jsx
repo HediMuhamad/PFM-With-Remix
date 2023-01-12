@@ -11,7 +11,12 @@ export default function Card({ title, value, variant }) {
   return (
     <div className={`card ${className}`}>
       <span className="card-title">{title}</span>
-      <Button type={"normal"} size={"small"} className={"card-detail-button"}>
+      <Button
+        type={"normal"}
+        variant={variant}
+        size={"small"}
+        className={"card-detail-button"}
+      >
         details
       </Button>
       <span className="card-value">{value}</span>
