@@ -74,7 +74,7 @@ export default function Transaction({ category, title, date, amount, type }) {
 Transaction.propTypes = {
   category: PropTypes.oneOf(transactionCategories).isRequired,
   title: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
+  date: PropTypes.object.isRequired,
   amount: PropTypes.string.isRequired,
   type: PropTypes.oneOf(transactionTypes).isRequired,
 }

@@ -254,7 +254,7 @@
         color: $danger;
 
         &::before {
-          content: "-$";
+          content: "-";
         }
       }
     }
@@ -264,10 +264,14 @@
 .transaction-type-income {
   & .date-amount-container {
     & .amount {
-      background-color: lighten($color: $success, $amount: 25);
+      background-color: lighten($color: $info, $amount: 20);
 
       & > span {
-        color: $success;
+        color: darken($color: $info, $amount: 10);
+
+        &::before {
+          content: "+";
+        }
       }
     }
   }

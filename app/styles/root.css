@@ -232,14 +232,17 @@
   color: #ef2a4c;
 }
 .transaction-type-expense .date-amount-container .amount > span::before {
-  content: "-$";
+  content: "-";
 }
 
 .transaction-type-income .date-amount-container .amount {
-  background-color: #23f8b6;
+  background-color: #e1f5fe;
 }
 .transaction-type-income .date-amount-container .amount > span {
-  color: #059669;
+  color: #4bc2fb;
+}
+.transaction-type-income .date-amount-container .amount > span::before {
+  content: "+";
 }
 
 body {
