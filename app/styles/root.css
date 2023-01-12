@@ -7,25 +7,77 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/Inter-Medium.woff2") format("woff2"), url("/fonts/Inter-Medium.woff") format("woff");
+  src: url("/fonts/Inter-Medium.woff2") format("woff2"),
+    url("/fonts/Inter-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/Inter-Regular.woff2") format("woff2"), url("/fonts/Inter-Regular.woff") format("woff");
+  src: url("/fonts/Inter-Regular.woff2") format("woff2"),
+    url("/fonts/Inter-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/Inter-SemiBold.woff2") format("woff2"), url("/fonts/Inter-SemiBold.woff") format("woff");
+  src: url("/fonts/Inter-SemiBold.woff2") format("woff2"),
+    url("/fonts/Inter-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
+/* button-component */
+.button {
+  border-radius: 1000px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease;
+  outline: none;
+  text-transform: capitalize;
+}
+
+.button-border-no-rounded {
+  border-radius: 0 !important;
+}
+
+.button-type-normal {
+  border-width: 0 !important;
+  background-color: black;
+  color: white;
+}
+
+.button-type-ghost {
+  background-color: transparent;
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+}
+
+.button-size-small {
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.button-size-normal {
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.button-size-large {
+  padding: 8px 16px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
 body {
   font-family: "inter";
   width: 100vw;
@@ -73,7 +125,7 @@ body .app-container .slidebar .navlink {
   text-decoration: none;
   font-weight: 400;
 }
-body .app-container .slidebar .navlink[aria-current=page] {
+body .app-container .slidebar .navlink[aria-current="page"] {
   color: #ffffff !important;
 }
 body .app-container .topbar {
