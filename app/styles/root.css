@@ -7,24 +7,21 @@
 
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/Inter-Medium.woff2") format("woff2"),
-    url("/fonts/Inter-Medium.woff") format("woff");
+  src: url("/fonts/Inter-Medium.woff2") format("woff2"), url("/fonts/Inter-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/Inter-Regular.woff2") format("woff2"),
-    url("/fonts/Inter-Regular.woff") format("woff");
+  src: url("/fonts/Inter-Regular.woff2") format("woff2"), url("/fonts/Inter-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
-  src: url("/fonts/Inter-SemiBold.woff2") format("woff2"),
-    url("/fonts/Inter-SemiBold.woff") format("woff");
+  src: url("/fonts/Inter-SemiBold.woff2") format("woff2"), url("/fonts/Inter-SemiBold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -36,8 +33,7 @@
   font-size: 16px;
   font-weight: 600;
   text-align: center;
-  transition: background-color 0.3s ease, border-color 0.3s ease,
-    color 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   outline: none;
   text-transform: capitalize;
 }
@@ -48,8 +44,6 @@
 
 .button-type-normal {
   border-width: 0 !important;
-  background-color: black;
-  color: white;
 }
 
 .button-type-ghost {
@@ -76,6 +70,107 @@
   padding: 8px 16px;
   font-size: 20px;
   font-weight: 500;
+}
+
+/* card-component */
+.card {
+  width: 280px;
+  height: 110px;
+  padding: 20px 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 3fr;
+  background: linear-gradient(to right, #7dd3fc, #bae6fd);
+  border-radius: 7px;
+  gap: 14px 100px;
+}
+.card .card-title {
+  width: 100%;
+  height: 100%;
+  color: #1a74c7;
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: auto 0px;
+}
+.card .card-detail-button {
+  max-width: 64px;
+  max-height: 20px;
+  background-color: rgba(56, 189, 248, 0.75);
+  color: white;
+  cursor: pointer;
+  margin: auto 0px auto auto;
+}
+.card .card-value {
+  grid-column: span 2;
+  width: 100%;
+  height: 100%;
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 500;
+}
+.card .card-value::before {
+  content: "$";
+}
+
+.card-primary {
+  background: linear-gradient(to right, #77bee4, #cce6f5);
+}
+.card-primary .card-title {
+  color: #1c658c;
+}
+.card-primary .card-detail-button {
+  background-color: #379fd7;
+}
+
+.card-secondary {
+  background: linear-gradient(to right, #b2b2b8, #efeff0);
+}
+.card-secondary .card-title {
+  color: #71717a;
+}
+.card-secondary .card-detail-button {
+  background-color: #a5a5ac;
+}
+
+.card-success {
+  background: linear-gradient(to right, #3cf8be, #d0fdef);
+}
+.card-success .card-title {
+  color: #059669;
+}
+.card-success .card-detail-button {
+  background-color: #0af7ad;
+}
+
+.card-warning {
+  background: linear-gradient(to right, #ffd454, #ffeeba);
+}
+.card-warning .card-title {
+  color: #d39e00;
+}
+.card-warning .card-detail-button {
+  background-color: #ffc107;
+}
+
+.card-danger {
+  background: linear-gradient(to right, #f8a1b0, #fde8eb);
+}
+.card-danger .card-title {
+  color: #ef2a4c;
+}
+.card-danger .card-detail-button {
+  background-color: #f6899c;
+}
+
+.card-info {
+  background: linear-gradient(to right, #afe4fd, #e1f5fe);
+}
+.card-info .card-title {
+  color: #0596db;
+}
+.card-info .card-detail-button {
+  background-color: #64cbfb;
 }
 
 body {
@@ -125,7 +220,7 @@ body .app-container .slidebar .navlink {
   text-decoration: none;
   font-weight: 400;
 }
-body .app-container .slidebar .navlink[aria-current="page"] {
+body .app-container .slidebar .navlink[aria-current=page] {
   color: #ffffff !important;
 }
 body .app-container .topbar {
