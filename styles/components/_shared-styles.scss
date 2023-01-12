@@ -185,3 +185,90 @@
     background-color: darken($color: $info, $amount: 5);
   }
 }
+
+/* transaction-component */
+.transaction {
+  width: 100%;
+  height: 56px;
+  padding: 12px 15px;
+  background-color: $light;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .icon-title-container {
+    column-gap: 14px;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      height: 100%;
+      aspect-ratio: 1;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 400;
+      color: #334155;
+    }
+  }
+
+  & .date-amount-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+
+    & .date {
+      text-align: center;
+      font-weight: 400;
+      font-size: 16px;
+      width: 120px;
+      text-transform: capitalize;
+    }
+
+    & .amount {
+      width: 80px;
+      height: 100%;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & > span {
+        margin: auto;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.transaction-type-expense {
+  & .date-amount-container {
+    & .amount {
+      background-color: lighten($color: $danger, $amount: 25);
+
+      & > span {
+        color: $danger;
+
+        &::before {
+          content: "-$";
+        }
+      }
+    }
+  }
+}
+
+.transaction-type-income {
+  & .date-amount-container {
+    & .amount {
+      background-color: lighten($color: $success, $amount: 25);
+
+      & > span {
+        color: $success;
+      }
+    }
+  }
+}
