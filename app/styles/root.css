@@ -36,6 +36,7 @@
   transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
   outline: none;
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 .button-border-no-rounded {
@@ -44,13 +45,71 @@
 
 .button-type-normal {
   border-width: 0 !important;
+  border-color: transparent !important;
 }
 
 .button-type-ghost {
-  background-color: transparent;
+  background-color: transparent !important;
   border-width: 2px;
   border-style: solid;
-  border-color: black;
+}
+
+.button-type-text {
+  background-color: transparent !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
+}
+
+.button-variant-primary {
+  background-color: #cce6f5;
+  border-color: #1c658c;
+  color: #1c658c;
+}
+
+.button-variant-secondary {
+  background-color: #e7e7e9;
+  border-color: #71717a;
+  color: #71717a;
+}
+
+.button-variant-danger {
+  background-color: #fbd0d8;
+  border-color: #ef2a4c;
+  color: #ef2a4c;
+}
+
+.button-variant-success {
+  background-color: #b7fde7;
+  border-color: #059669;
+  color: #059669;
+}
+
+.button-variant-info {
+  background-color: #e1f5fe;
+  border-color: #7dd3fc;
+  color: #7dd3fc;
+}
+
+.button-variant-warning {
+  background-color: #fff4d3;
+  border-color: #d39e00;
+  color: #d39e00;
+}
+
+.button-variant-dark {
+  background-color: #a9b3c3;
+  border-color: #222831;
+  color: #222831;
+}
+
+.button-variant-light {
+  background-color: white;
+  border-color: #f8fafc;
+  color: #f8fafc;
+}
+
+.button-variant-light.button-type-normal {
+  color: #222831 !important;
 }
 
 .button-size-small {

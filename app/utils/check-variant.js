@@ -1,10 +1,12 @@
+export const variants = [
+  "primary",
+  "secondary",
+  "success",
+  "danger",
+  "warning",
+  "info",
+]
+
 export default function checkVariant(variant) {
-  return [
-    "primary",
-    "secondary",
-    "success",
-    "danger",
-    "warning",
-    "info",
-  ].includes(variant, 0)
+  return variants.includes(variant.toLowerCase(), 0)
 }
