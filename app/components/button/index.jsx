@@ -1,8 +1,8 @@
 import PropTypes from "prop-types"
 import { default as checkVariant, variants } from "~/utils/check-variant"
 
-const types = ["normal", "ghost", "text"]
-const sizes = ["large", "normal", "small"]
+export const types = ["normal", "ghost", "text"]
+export const sizes = ["large", "normal", "small"]
 
 export default function Button({
   type,

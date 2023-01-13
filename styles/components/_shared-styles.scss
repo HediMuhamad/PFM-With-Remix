@@ -104,6 +104,58 @@
   font-weight: 500;
 }
 
+/* circle component */
+.circle-button {
+  max-width: min-content;
+  aspect-ratio: 1;
+  font-weight: 500;
+}
+
+.circle-button-variant-primary {
+  background-color: $primary;
+  border-color: $primary;
+}
+
+.circle-button-variant-secondary {
+  background-color: $secondary;
+  border-color: $secondary;
+}
+
+.circle-button-variant-danger {
+  background-color: $danger;
+  border-color: $danger;
+}
+
+.circle-button-variant-success {
+  background-color: $success;
+  border-color: $success;
+}
+
+.circle-button-variant-info {
+  background-color: $info;
+  border-color: $info;
+}
+
+.circle-button-variant-warning {
+  background-color: $warning;
+  border-color: $warning;
+}
+
+.circle-button-variant-dark {
+  background-color: $dark;
+  border-color: $dark;
+}
+
+.circle-button-variant-light {
+  background-color: $light;
+  border-color: $light;
+  color: $light;
+}
+
+.circle-button.button-type-normal {
+  color: #ffffff !important;
+}
+
 /* card-component */
 .card {
   width: 280px;
