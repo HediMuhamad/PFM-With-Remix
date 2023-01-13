@@ -417,3 +417,44 @@
     }
   }
 }
+
+/* date-picker component */
+
+.date-picker {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .date-picker-toggler {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 12px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    text-transform: capitalize;
+    cursor: pointer;
+
+    .date-picker-content {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .date-picker-icon {
+      height: 100%;
+      aspect-ratio: 1;
+    }
+  }
+
+  .date-picker-selector {
+    display: none;
+  }
+
+  .date-picker-selector-showed {
+    display: block !important;
+  }
+}

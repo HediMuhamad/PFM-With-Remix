@@ -1,3 +1,5 @@
+@import "react-date-range/dist/styles.css";
+@import "react-date-range/dist/theme/default.css";
 * {
   box-sizing: border-box;
   font-family: inherit;
@@ -373,6 +375,41 @@
 .dropdown .dropdown-option .option-title {
   font-size: 16px;
   text-transform: capitalize;
+}
+
+/* date-picker component */
+.date-picker {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.date-picker .date-picker-toggler {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 12px;
+  background-color: #ffffff;
+  border-radius: 7px;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.date-picker .date-picker-toggler .date-picker-content {
+  font-size: 16px;
+  font-weight: 400;
+}
+.date-picker .date-picker-toggler .date-picker-icon {
+  height: 100%;
+  aspect-ratio: 1;
+}
+.date-picker .date-picker-selector {
+  display: none;
+}
+.date-picker .date-picker-selector-showed {
+  display: block !important;
 }
 
 body {
