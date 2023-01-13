@@ -21,7 +21,7 @@ export default function DropDown({ options, selected, toggleOption }) {
               )
             : "select something"}
         </span>
-        <DownArrow height={32} width={32} />
+        <DownArrow height={14} width={14} />
       </div>
       <ul
         className={`dropdown-list ${
