@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
-import { useCallback, useState } from "react"
+import { useCallback, useRef, useState } from "react"
 import { Calendar } from "react-date-range"
+import useOnClickAway from "~/hooks/useOnClickAway"
 import { Calender as CalenderIcon } from "~/shared/assets/"
 
 export default function DatePicker({
@@ -11,14 +12,19 @@ export default function DatePicker({
   datePickerMinDate,
   datePickerOnAnOptionSelected,
 }) {
+  const ref = useRef(null)
   const [isSelectorShowedUp, setIsSelectorShowed] = useState(false)
 
   const pickerTogglerHandler = useCallback(() => {
     setIsSelectorShowed((isSelectorShowedUp) => !isSelectorShowedUp)
   }, [])
 
+  useOnClickAway(ref, () => {
+    setIsSelectorShowed(false)
+  })
+
   return (
-    <div className="date-picker">
+    <div className="date-picker" ref={ref}>
       <input
         type={"hidden"}
         name={nameInForm}

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
-import { useCallback, useState } from "react"
+import { useCallback, useRef, useState } from "react"
+import useOnClickAway from "~/hooks/useOnClickAway"
 import { Checked, DownArrow } from "~/shared/assets/"
 
 export default function DropDown({
@@ -8,6 +9,7 @@ export default function DropDown({
   dropDownSelectedOptions,
   dropDownToggleOptions,
 }) {
+  const ref = useRef(null)
   const [isListShowedUp, setIsListShowedUp] = useState(false)
 
   const listToggleHandler = useCallback(() => {
@@ -26,8 +28,12 @@ export default function DropDown({
   # dropDownSelectedOptions just save the index of the selected item in an array
   */
 
+  useOnClickAway(ref, () => {
+    setIsListShowedUp(false)
+  })
+
   return (
-    <div className="drop-down">
+    <div className="drop-down" ref={ref}>
       <input
         type={"hidden"}
         name={nameInForm}
