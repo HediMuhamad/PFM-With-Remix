@@ -296,6 +296,58 @@
   }
 }
 
+.card-info {
+  background: linear-gradient(
+    to right,
+    lighten($color: $info, $amount: 10),
+    lighten($color: $info, $amount: 20)
+  );
+
+  & .card-title {
+    color: darken($color: $info, $amount: 30);
+  }
+
+  & .card-detail-button {
+    background-color: darken($color: $info, $amount: 5);
+  }
+}
+
+.card-dark {
+  background: linear-gradient(
+    to right,
+    lighten($color: $dark, $amount: 10),
+    lighten($color: $dark, $amount: 20)
+  );
+
+  & .card-title {
+    color: lighten($color: $light, $amount: 30);
+  }
+
+  & .card-detail-button {
+    background-color: darken($color: $dark, $amount: 5);
+  }
+}
+
+.card-light {
+  background: linear-gradient(
+    to right,
+    lighten($color: $light, $amount: 10),
+    lighten($color: $light, $amount: 20)
+  );
+
+  & .card-title {
+    color: lighten($color: $dark, $amount: 10);
+  }
+
+  & .card-value {
+    color: lighten($color: $dark, $amount: 10);
+  }
+
+  & .card-detail-button {
+    background-color: darken($color: $light, $amount: 5);
+  }
+}
+
 /* transaction-component */
 .transaction {
   width: 100%;

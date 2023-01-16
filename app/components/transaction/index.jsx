@@ -1,70 +1,85 @@
 import PropTypes from "prop-types"
-import { Salary, Accessories, Book } from "~/shared/assets"
+import { useCallback, useMemo } from "react"
+import {
+  BillsIcon,
+  ClothsIcon,
+  FoodIcon,
+  GiftIcon,
+  SalaryIcon,
+  LoanIcon,
+  HealthIcon,
+  TechIcon,
+  SportsIcon,
+  UndefinedCategoryIcon,
+} from "~/shared/assets/"
 import currencyFormatter from "~/utils/currency-formatter"
 
-const transactionCategories = ["SALARY", "BOOK", "ACCESSORIES"]
-const transactionTypes = ["INCOME", "EXPENSE"]
-
-export default function Transaction({ category, title, date, amount, type }) {
-  const haveProperTransactionType = transactionTypes.includes(
-    type.toUpperCase(),
-    0
-  )
-  const haveProperTransactionCategory = transactionCategories.includes(
-    category.toUpperCase(),
-    0
-  )
-
+const getDayName = (date) => {
   switch (date.getDate()) {
     case new Date().getDate(): {
-      date = "today"
-      break
+      return "today"
     }
     case new Date().getDate() - 1: {
-      date = "yesterday"
-      break
+      return "yesterday"
     }
     default: {
-      date = date.toLocaleDateString()
-      break
+      return date.toLocaleDateString()
     }
   }
+}
 
-  amount = currencyFormatter(+amount, { useAbbreviation: true, symbol: "$" })
-
-  type = haveProperTransactionType ? type.toLowerCase() : "income"
-  category = haveProperTransactionCategory ? category.toLowerCase() : "salary"
-
-  const className = `transaction transaction-type-${type}`
-
-  let Icon = <></>
-  switch (category) {
-    case "salary": {
-      Icon = Salary
-      break
+export default function Transaction({
+  transactionCategory,
+  transactionTitle,
+  transactionDate,
+  transactionAmount,
+  transactionType,
+}) {
+  const getIcon = useMemo(() => {
+    switch (transactionCategory.toUpperCase()) {
+      case "SALARY":
+        return SalaryIcon
+      case "LOAN":
+        return LoanIcon
+      case "GIFT":
+        return GiftIcon
+      case "TECH":
+        return TechIcon
+      case "FOOD":
+        return FoodIcon
+      case "BILLS":
+        return BillsIcon
+      case "SPORTS":
+        return SportsIcon
+      case "HEALTH":
+        return HealthIcon
+      case "CLOTHS":
+        return ClothsIcon
+      default:
+        return UndefinedCategoryIcon
     }
-    case "accessories": {
-      Icon = Accessories
-      break
-    }
-    case "book": {
-      Icon = Book
-      break
-    }
-  }
+  }, [transactionCategory])
+
+  const formatedTransactionAmount = useMemo(() => {
+    return currencyFormatter(+transactionAmount, {
+      useAbbreviation: true,
+      symbol: "$",
+    })
+  }, [transactionAmount])
+
+  const Icon = getIcon()
+  const className = `transaction transaction-type-${transactionType.toLowerCase()}`
 
   return (
     <div className={className}>
       <div className="icon-title-container">
-        <div className="icon">
-          <Icon />
-        </div>
-        <div className="title">{title}</div>
+        <div className="icon">{Icon}</div>
+        <div className="title">{transactionTitle}</div>
       </div>
       <div className="date-amount-container">
-        <div className="date">{date}</div>
+        <div className="date">{getDayName(transactionDate)}</div>
         <div className="amount">
-          <span className="amount-holder">{amount}</span>
+          <span className="amount-holder">{formatedTransactionAmount}</span>
         </div>
       </div>
     </div>
@@ -72,9 +87,9 @@ export default function Transaction({ category, title, date, amount, type }) {
 }
 
 Transaction.propTypes = {
-  category: PropTypes.oneOf(transactionCategories).isRequired,
-  title: PropTypes.string.isRequired,
-  date: PropTypes.object.isRequired,
-  amount: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(transactionTypes).isRequired,
+  transactionCategory: PropTypes.string.isRequired,
+  transactionTitle: PropTypes.string.isRequired,
+  transactionDate: PropTypes.object.isRequired,
+  transactionAmount: PropTypes.number.isRequired,
+  transactionType: PropTypes.string.isRequired,
 }

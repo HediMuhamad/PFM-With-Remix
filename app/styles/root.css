@@ -285,6 +285,39 @@
   background-color: #64cbfb;
 }
 
+.card-info {
+  background: linear-gradient(to right, #afe4fd, #e1f5fe);
+}
+.card-info .card-title {
+  color: #0596db;
+}
+.card-info .card-detail-button {
+  background-color: #64cbfb;
+}
+
+.card-dark {
+  background: linear-gradient(to right, #37414f, #4c596d);
+}
+.card-dark .card-title {
+  color: white;
+}
+.card-dark .card-detail-button {
+  background-color: #181c22;
+}
+
+.card-light {
+  background: linear-gradient(to right, white, white);
+}
+.card-light .card-title {
+  color: #37414f;
+}
+.card-light .card-value {
+  color: #37414f;
+}
+.card-light .card-detail-button {
+  background-color: #e6edf4;
+}
+
 /* transaction-component */
 .transaction {
   width: 100%;

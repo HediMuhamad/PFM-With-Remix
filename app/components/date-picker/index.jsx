@@ -1,14 +1,15 @@
 import PropTypes from "prop-types"
 import { useCallback, useState } from "react"
 import { Calendar } from "react-date-range"
-import { Calender as CalenderIcon } from "~/shared/assets"
+import { Calender as CalenderIcon } from "~/shared/assets/"
 
 export default function DatePicker({
-  label,
-  date,
-  maxDate,
-  minDate,
-  onSelect,
+  nameInForm,
+  datePickerLabel,
+  datePickerDate,
+  datePickerMaxDate,
+  datePickerMinDate,
+  datePickerOnAnOptionSelected,
 }) {
   const [isSelectorShowedUp, setIsSelectorShowed] = useState(false)
 
@@ -18,9 +19,14 @@ export default function DatePicker({
 
   return (
     <div className="date-picker">
+      <input
+        type={"hidden"}
+        name={nameInForm}
+        value={datePickerDate ? datePickerDate.toString() : ""}
+      />
       <div className="date-picker-toggler" onClick={pickerTogglerHandler}>
-        <span className="date-picker-content">{`${label}${
-          date ? ": " + date.toLocaleDateString() : ""
+        <span className="date-picker-content">{`${datePickerLabel}${
+          datePickerDate ? ": " + datePickerDate.toLocaleDateString() : ""
         }`}</span>
         <span className="date-picker-icon">
           <CalenderIcon />
@@ -32,10 +38,10 @@ export default function DatePicker({
         }`}
       >
         <Calendar
-          maxDate={maxDate}
-          date={date ? date : new Date()}
-          minDate={minDate}
-          onChange={onSelect}
+          maxDate={datePickerMaxDate}
+          date={datePickerDate ? datePickerDate : new Date()}
+          minDate={datePickerMinDate}
+          onChange={datePickerOnAnOptionSelected}
         />
       </div>
     </div>
@@ -43,9 +49,19 @@ export default function DatePicker({
 }
 
 DatePicker.propTypes = {
-  label: PropTypes.string.isRequired,
-  date: PropTypes.objectOf(Date).isRequired,
-  onSelect: PropTypes.func.isRequired,
-  maxDate: PropTypes.objectOf(Date).isRequired,
-  minDate: PropTypes.objectOf(Date).isRequired,
+  nameInForm: PropTypes.string,
+  datePickerLabel: PropTypes.string,
+  datePickerDate: PropTypes.objectOf(Date),
+  datePickerMaxDate: PropTypes.objectOf(Date),
+  datePickerMinDate: PropTypes.objectOf(Date),
+  datePickerOnAnOptionSelected: PropTypes.func,
+}
+
+DatePicker.defaultProps = {
+  nameInForm: "",
+  datePickerLabel: "date",
+  datePickerDate: null,
+  datePickerMaxDate: null,
+  datePickerMinDate: null,
+  datePickerOnAnOptionSelected: () => {},
 }

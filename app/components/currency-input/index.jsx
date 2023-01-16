@@ -1,15 +1,29 @@
 import PropTypes from "prop-types"
 
-export default function CurrencyInput({ value, changeHandler }) {
+export default function CurrencyInput({
+  currencyInputValue,
+  currencyInputValueChangeHandler,
+  ...props
+}) {
   return (
     <div className="currency-input-component">
       <span>$</span>
-      <input type={"number"} value={value} onChange={changeHandler} />
+      <input
+        type={"number"}
+        value={currencyInputValue}
+        onChange={currencyInputValueChangeHandler}
+        {...props}
+      />
     </div>
   )
 }
 
 CurrencyInput.propTypes = {
-  value: PropTypes.number.isRequired,
-  changeHandler: PropTypes.func.isRequired,
+  currencyInputValue: PropTypes.string,
+  currencyInputValueChangeHandler: PropTypes.func,
+}
+
+CurrencyInput.defaultProps = {
+  currencyInputValue: "",
+  currencyInputValueChangeHandler: () => {},
 }
