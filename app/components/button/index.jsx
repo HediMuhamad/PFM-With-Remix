@@ -10,10 +10,10 @@ export default function Button({
   className,
   ...props
 }) {
-  const sizeClassName = `button-size-${buttonSize}`
-  const typeClassName = `button-type-${buttonType}`
-  const variantClassName = `button-variant-${buttonVariant}`
-  const roundedClassName = buttonIsRounded ? "" : "button-border-no-rounded"
+  const sizeClassName = `button--size-${buttonSize}`
+  const typeClassName = `button--type-${buttonType}`
+  const variantClassName = `button--variant-${buttonVariant}`
+  const roundedClassName = buttonIsRounded ? "" : "button--border-noround"
 
   let classes = `button ${sizeClassName} ${roundedClassName} ${variantClassName} ${typeClassName} ${className}`
 

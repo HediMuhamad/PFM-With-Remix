@@ -1,0 +1,195 @@
+.statistic-card {
+  width: 280px;
+  height: 110px;
+  padding: 20px 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 3fr;
+  background: linear-gradient(
+    to right,
+    lighten($color: $info, $amount: 10),
+    lighten($color: $info, $amount: 20)
+  );
+  border-radius: 7px;
+  gap: 14px 100px;
+
+  & .statistic-card__title {
+    width: 100%;
+    height: 100%;
+    color: $primary;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin: auto 0px;
+  }
+
+  & .statistic-card__detail-button {
+    max-width: 64px;
+    max-height: 20px;
+    color: white;
+    cursor: pointer;
+    margin: auto 0px auto auto;
+    text-transform: none;
+  }
+
+  & .statistic-card__amount {
+    &::before {
+      content: "$";
+    }
+
+    grid-column: span 2;
+    width: 100%;
+    height: 100%;
+    color: $white;
+    font-size: 30px;
+    font-weight: 500;
+  }
+}
+
+.statistic-card--variant-primary {
+  background: linear-gradient(
+    to right,
+    lighten($color: $primary, $amount: 35),
+    lighten($color: $primary, $amount: 55)
+  );
+
+  & .statistic-card__title {
+    color: $primary;
+  }
+
+  & .statistic-card__detail-button {
+    background-color: lighten($color: $primary, $amount: 20);
+  }
+}
+
+.statistic-card--variant-secondary {
+  background: linear-gradient(
+    to right,
+    lighten($color: $secondary, $amount: 25),
+    lighten($color: $secondary, $amount: 48)
+  );
+
+  & .statistic-card__title {
+    color: $secondary;
+  }
+
+  & .statistic-card__detail-button {
+    background-color: lighten($color: $secondary, $amount: 20);
+  }
+}
+
+.statistic-card--variant-success {
+  background: linear-gradient(
+    to right,
+    lighten($color: $success, $amount: 30),
+    lighten($color: $success, $amount: 60)
+  );
+
+  & .statistic-card__title {
+    color: $success;
+  }
+
+  & .statistic-card__detail-button {
+    background-color: lighten($color: $success, $amount: 20);
+  }
+}
+
+.statistic-card--variant-warning {
+  background: linear-gradient(
+    to right,
+    lighten($color: $warning, $amount: 15),
+    lighten($color: $warning, $amount: 35)
+  );
+
+  & .statistic-card__title {
+    color: darken($color: $warning, $amount: 10);
+  }
+
+  & .statistic-card__detail-button {
+    background-color: $warning;
+  }
+}
+
+.statistic-card--variant-danger {
+  background: linear-gradient(
+    to right,
+    lighten($color: $danger, $amount: 25),
+    lighten($color: $danger, $amount: 40)
+  );
+
+  & .statistic-card__title {
+    color: $danger;
+  }
+
+  & .statistic-card__detail-button {
+    background-color: lighten($color: $danger, $amount: 20);
+  }
+}
+
+.statistic-card--variant-info {
+  background: linear-gradient(
+    to right,
+    lighten($color: $info, $amount: 10),
+    lighten($color: $info, $amount: 20)
+  );
+
+  & .statistic-card__title {
+    color: darken($color: $info, $amount: 30);
+  }
+
+  & .statistic-card__detail-button {
+    background-color: darken($color: $info, $amount: 5);
+  }
+}
+
+.statistic-card--variant-info {
+  background: linear-gradient(
+    to right,
+    lighten($color: $info, $amount: 10),
+    lighten($color: $info, $amount: 20)
+  );
+
+  & .statistic-card__title {
+    color: darken($color: $info, $amount: 30);
+  }
+
+  & .statistic-card__detail-button {
+    background-color: darken($color: $info, $amount: 5);
+  }
+}
+
+.statistic-card--variant-dark {
+  background: linear-gradient(
+    to right,
+    lighten($color: $dark, $amount: 10),
+    lighten($color: $dark, $amount: 20)
+  );
+
+  & .statistic-card__title {
+    color: lighten($color: $light, $amount: 30);
+  }
+
+  & .statistic-card__detail-button {
+    background-color: darken($color: $dark, $amount: 5);
+  }
+}
+
+.statistic-card--variant-light {
+  background: linear-gradient(
+    to right,
+    lighten($color: $light, $amount: 10),
+    lighten($color: $light, $amount: 20)
+  );
+
+  & .statistic-card__title {
+    color: lighten($color: $dark, $amount: 10);
+  }
+
+  & .statistic-card__amount {
+    color: lighten($color: $dark, $amount: 10);
+  }
+
+  & .statistic-card__detail-button {
+    background-color: darken($color: $light, $amount: 5);
+  }
+}

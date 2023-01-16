@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import { useCallback, useMemo } from "react"
+import { useMemo } from "react"
 import {
   BillsIcon,
   ClothsIcon,
@@ -68,18 +68,24 @@ export default function Transaction({
   }, [transactionAmount])
 
   const Icon = getIcon()
-  const className = `transaction transaction-type-${transactionType.toLowerCase()}`
+  const className = `transaction transaction--type-${transactionType.toLowerCase()}`
 
   return (
     <div className={className}>
-      <div className="icon-title-container">
-        <div className="icon">{Icon}</div>
-        <div className="title">{transactionTitle}</div>
+      <div className="transaction__title-container">
+        <div className="transaction__title-container__icon">{Icon}</div>
+        <div className="transaction__title-container__title">
+          {transactionTitle}
+        </div>
       </div>
-      <div className="date-amount-container">
-        <div className="date">{getDayName(transactionDate)}</div>
-        <div className="amount">
-          <span className="amount-holder">{formatedTransactionAmount}</span>
+      <div className="transaction__detail-container">
+        <div className="transaction__detail-container__date">
+          {getDayName(transactionDate)}
+        </div>
+        <div className="transaction__detail-container__amount-box">
+          <span className="transaction__detail-container__amount-box__amount">
+            {formatedTransactionAmount}
+          </span>
         </div>
       </div>
     </div>

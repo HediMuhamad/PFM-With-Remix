@@ -24,17 +24,17 @@ export default function DatePicker({
         name={nameInForm}
         value={datePickerDate ? datePickerDate.toString() : ""}
       />
-      <div className="date-picker-toggler" onClick={pickerTogglerHandler}>
-        <span className="date-picker-content">{`${datePickerLabel}${
+      <div className="date-picker__toggler" onClick={pickerTogglerHandler}>
+        <span className="date-picker__toggler__content">{`${datePickerLabel}${
           datePickerDate ? ": " + datePickerDate.toLocaleDateString() : ""
         }`}</span>
-        <span className="date-picker-icon">
+        <span className="date-picker__toggler__icon">
           <CalenderIcon />
         </span>
       </div>
       <div
-        className={`date-picker-selector ${
-          isSelectorShowedUp ? `date-picker-selector-showed` : ""
+        className={`date-picker__picker ${
+          isSelectorShowedUp ? `date-picker__picker--showed-yes` : ""
         }`}
       >
         <Calendar

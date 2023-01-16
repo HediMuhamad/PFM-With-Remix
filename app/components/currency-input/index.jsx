@@ -6,9 +6,10 @@ export default function CurrencyInput({
   ...props
 }) {
   return (
-    <div className="currency-input-component">
-      <span>$</span>
+    <div className="currency-input">
+      <span className="currency-input__symbol">$</span>
       <input
+        className="currency-input__input"
         type={"number"}
         value={currencyInputValue}
         onChange={currencyInputValueChangeHandler}

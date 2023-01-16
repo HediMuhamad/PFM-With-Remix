@@ -11,6 +11,7 @@ import {
 
 import rootStyles from "~/styles/root.css"
 import { AppLogo } from "./shared/assets"
+import { useMemo } from "react"
 
 /**
  * @returns {import("@remix-run/node").LinkDescriptor[]}
@@ -44,26 +45,28 @@ function AppContainer() {
     },
   }
 
+  const navlinksClassName = useMemo(() => "slidebar__navlink", [])
+
   return (
-    <div className="app-container">
+    <>
       <nav className="slidebar">
-        <NavLink to={"/"}>
+        <NavLink className={navlinksClassName + "--logo-yes"} to={"/"}>
           <AppLogo />
         </NavLink>
-        <NavLink className={"navlink"} to={"/"}>
+        <NavLink className={navlinksClassName} to={"/"}>
           {pageDetails["/"].title}
         </NavLink>
-        <NavLink className={"navlink"} to={"/transactions"}>
+        <NavLink className={navlinksClassName} to={"/transactions"}>
           {pageDetails["/transactions"].title}
         </NavLink>
       </nav>
       <div className="topbar">
-        <span>{pageDetails[path].title}</span>
+        <span className="topbar__headline">{pageDetails[path].title}</span>
       </div>
       <main className="main">
         <Outlet />
       </main>
-    </div>
+    </>
   )
 }
 
