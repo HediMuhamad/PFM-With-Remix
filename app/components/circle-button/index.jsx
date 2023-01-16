@@ -1,23 +1,21 @@
 import PropTypes from "prop-types"
-import { default as Button, types, sizes } from "../button"
-import { variants } from "~/utils/check-variant"
+import Button from "~/components/button"
+import { variants, sizes, types } from "~/utils/common-properties"
 
 export default function CircleButton({
   children,
-  variant,
-  size,
-  type,
-  onClick,
+  buttonVariant,
+  buttonSize,
+  buttonType,
   className,
   ...props
 }) {
   return (
     <Button
-      rounded={true}
-      size={size}
-      type={type}
-      onClick={onClick}
-      className={`circle-button circle-button-variant-${variant} ${className}`}
+      buttonIsRounded={true}
+      buttonSize={buttonSize}
+      buttonType={buttonType}
+      className={`circle-button circle-button-variant-${buttonVariant} ${className}`}
       {...props}
     >
       {children}
@@ -26,18 +24,17 @@ export default function CircleButton({
 }
 
 CircleButton.propTypes = {
-  type: PropTypes.oneOf(types),
-  size: PropTypes.oneOf(sizes),
-  variant: PropTypes.oneOf(variants.push(...["dark", "light"])),
-  children: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
+  buttonType: PropTypes.oneOf(types),
+  buttonSize: PropTypes.oneOf(sizes),
+  buttonVariant: PropTypes.oneOf(variants),
+  children: PropTypes.any,
   className: PropTypes.string,
 }
 
 CircleButton.defaultProps = {
-  type: "normal",
-  size: "large",
-  variant: variants[0],
-  onClick: null,
+  buttonType: types[0],
+  buttonSize: sizes[0],
+  buttonVariant: variants[0],
+  children: "",
   className: "",
 }

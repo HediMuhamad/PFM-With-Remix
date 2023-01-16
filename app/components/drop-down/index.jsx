@@ -1,22 +1,50 @@
 import PropTypes from "prop-types"
 import { useCallback, useState } from "react"
+import { Checked, DownArrow } from "~/shared/assets/"
 
-import { Checked, DownArrow } from "~/shared/assets"
-
-export default function DropDown({ options, selected, toggleOption }) {
+export default function DropDown({
+  nameInForm,
+  dropDownOptions,
+  dropDownSelectedOptions,
+  dropDownToggleOptions,
+}) {
   const [isListShowedUp, setIsListShowedUp] = useState(false)
 
   const listToggleHandler = useCallback(() => {
     setIsListShowedUp((isListShowedUp) => !isListShowedUp)
   }, [])
 
+  /*
+  # dropDownOptions should be like this model:
+  [{
+    name: string,
+    disabled: boolean
+  }, {...}]
+  */
+
+  /*
+  # dropDownSelectedOptions just save the index of the selected item in an array
+  */
+
   return (
     <div className="dropdown">
+      <input
+        type={"hidden"}
+        name={nameInForm}
+        value={JSON.stringify({
+          selected: dropDownSelectedOptions.map(
+            (index) => dropDownOptions[index].name
+          ),
+        })}
+      />
       <div className="dropdown-select" onClick={listToggleHandler}>
         <span className="dropdown-select-title">
-          {selected.length !== 0
-            ? selected.reduce(
-                (pv, cv) => `${pv}${pv ? ", " : ""}${options[cv].title}`,
+          {dropDownSelectedOptions.length !== 0
+            ? dropDownSelectedOptions.reduce(
+                (generatedText, currentIndex) =>
+                  `${generatedText}${generatedText ? ", " : ""}${
+                    dropDownOptions[currentIndex].name
+                  }`,
                 ""
               )
             : "select something"}
@@ -27,22 +55,22 @@ export default function DropDown({ options, selected, toggleOption }) {
         className={`dropdown-list ${
           isListShowedUp ? "dropdown-list-showed" : ""
         } `}
+        role={"listbox"}
       >
-        {Object.keys(options).map((key) => {
-          const isSelected = selected.includes(key)
-          const isDisabled = options[key].disabled
-
+        {dropDownOptions.map((item, index) => {
+          const isSelected = dropDownSelectedOptions.includes(index)
+          const isDisabled = item.disabled
           return (
             <li
               className="dropdown-option"
-              onClick={isDisabled ? null : () => toggleOption(key)}
+              onClick={isDisabled ? null : () => dropDownToggleOptions(index)}
               data-disabled={isDisabled}
-              key={key}
+              key={index}
             >
               <div className="option-check-box">
                 {isSelected ? <Checked /> : <></>}
               </div>
-              <div className="option-title">{options[key].title}</div>
+              <div className="option-title">{item.name}</div>
             </li>
           )
         })}
@@ -52,7 +80,12 @@ export default function DropDown({ options, selected, toggleOption }) {
 }
 
 DropDown.propTypes = {
-  options: PropTypes.object.isRequired,
-  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
-  toggleOption: PropTypes.func.isRequired,
+  nameInForm: PropTypes.string,
+  dropDownOptions: PropTypes.array.isRequired,
+  dropDownSelectedOptions: PropTypes.arrayOf(PropTypes.number).isRequired,
+  dropDownToggleOptions: PropTypes.func.isRequired,
+}
+
+DropDown.defaultProps = {
+  nameInForm: "",
 }
