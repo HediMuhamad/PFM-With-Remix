@@ -8,21 +8,21 @@ export default function StatisticCard({
   statisticCardVariant,
   statisticCardOnDetailButtonClicked,
 }) {
-  const className = `card-${statisticCardVariant}`
-
   return (
-    <div className={`card ${className}`}>
-      <span className="card-title">{statisticCardTitle}</span>
+    <div
+      className={`statistic-card statistic-card--variant-${statisticCardVariant}`}
+    >
+      <span className="statistic-card__title">{statisticCardTitle}</span>
       <Button
         buttonType={"normal"}
         buttonVariant={statisticCardVariant}
         buttonSize={"small"}
-        className={"card-detail-button"}
+        className={"statistic-card__detail-button"}
         onClick={statisticCardOnDetailButtonClicked}
       >
         details
       </Button>
-      <span className="card-value">{statisticCardAmount}</span>
+      <span className="statistic-card__amount">{statisticCardAmount}</span>
     </div>
   )
 }

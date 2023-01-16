@@ -27,7 +27,7 @@ export default function DropDown({
   */
 
   return (
-    <div className="dropdown">
+    <div className="drop-down">
       <input
         type={"hidden"}
         name={nameInForm}
@@ -37,8 +37,8 @@ export default function DropDown({
           ),
         })}
       />
-      <div className="dropdown-select" onClick={listToggleHandler}>
-        <span className="dropdown-select-title">
+      <div className="drop-down__select" onClick={listToggleHandler}>
+        <span className="drop-down__select__title">
           {dropDownSelectedOptions.length !== 0
             ? dropDownSelectedOptions.reduce(
                 (generatedText, currentIndex) =>
@@ -52,8 +52,8 @@ export default function DropDown({
         <DownArrow height={14} width={14} />
       </div>
       <ul
-        className={`dropdown-list ${
-          isListShowedUp ? "dropdown-list-showed" : ""
+        className={`drop-down__list ${
+          isListShowedUp ? "drop-down__list--showed-yes" : ""
         } `}
         role={"listbox"}
       >
@@ -62,15 +62,15 @@ export default function DropDown({
           const isDisabled = item.disabled
           return (
             <li
-              className="dropdown-option"
+              className="drop-down__list__option"
               onClick={isDisabled ? null : () => dropDownToggleOptions(index)}
               data-disabled={isDisabled}
               key={index}
             >
-              <div className="option-check-box">
+              <div className="drop-down__list__option__check-box">
                 {isSelected ? <Checked /> : <></>}
               </div>
-              <div className="option-title">{item.name}</div>
+              <div className="drop-down__list__option__title">{item.name}</div>
             </li>
           )
         })}

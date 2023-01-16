@@ -1,0 +1,36 @@
+.currency-input {
+  width: 240px;
+  height: 48px;
+  padding: 6px 8px;
+  background-color: $white;
+  border: 1px lighten($color: #000000, $amount: 90) solid;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 5px;
+  font-size: 16px;
+
+  .currency-input__symbol {
+    opacity: 0.4;
+  }
+
+  .currency-input__input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 16px;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    &[type="number"] {
+      -moz-appearance: textfield;
+    }
+  }
+}

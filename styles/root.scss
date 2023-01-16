@@ -1,78 +1,58 @@
 @import "global";
 @import "fonts";
 @import "colors";
-@import "components/shared-styles";
 @import "react-date-range/dist/styles.css";
 @import "react-date-range/dist/theme/default.css";
+@import "components/";
 
 body {
   font-family: "inter";
   width: 100vw;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 80px 1fr;
+  background-color: $white;
+  box-shadow: 0px 0px 18px 2px rgba($color: $black, $alpha: 0.1);
 
-  &::before {
-    content: "";
-    width: 100%;
-    height: 100%;
-    opacity: 0.1;
-    background-image: url("/assets/background-pattern.png");
-    background-repeat: repeat;
-    position: absolute;
-    z-index: 0;
+  & .slidebar {
+    grid-row: span 2;
+    padding: 25px 15px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    background: linear-gradient(#30475e, $dark);
+
+    & .slidebar__navlink__logo-yes {
+      margin-bottom: 60px;
+    }
+
+    & .slidebar__navlink {
+      font-size: 22px;
+      text-transform: capitalize;
+      color: #d4d4d8;
+      text-decoration: none;
+      font-weight: 400;
+    }
+
+    & .slidebar__navlink[aria-current="page"] {
+      color: $white !important;
+    }
   }
 
-  & .app-container {
-    width: 1440px;
-    height: 1024px;
-    position: relative;
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    grid-template-rows: 80px 1fr;
-    background-color: #ffffff;
-    box-shadow: 0px 0px 18px 2px rgba($color: #000000, $alpha: 0.1);
-
-    & .slidebar {
-      grid-row: span 2;
-      padding: 25px 15px;
-      display: flex;
-      flex-direction: column;
-      row-gap: 30px;
-      background: linear-gradient(#30475e, #222831);
-
-      & > :first-child {
-        margin-bottom: 60px;
-      }
-
-      & .navlink {
-        font-size: 22px;
-        text-transform: capitalize;
-        color: #d4d4d8;
-        text-decoration: none;
-        font-weight: 400;
-      }
-
-      & .navlink[aria-current="page"] {
-        color: #ffffff !important;
-      }
+  & .topbar {
+    background-color: $light;
+    padding: 25px;
+    & .topbar__headline {
+      font-size: 22px;
+      text-transform: capitalize;
+      color: $dark;
+      font-weight: 500;
     }
+  }
 
-    & .topbar {
-      background-color: #f7f4f3;
-      padding: 25px;
-      span {
-        font-size: 22px;
-        text-transform: capitalize;
-        color: #374151;
-        font-weight: 500;
-      }
-    }
-
-    & .main {
-      background-color: #ffffff;
-    }
+  & .main {
+    background-color: $white;
   }
 }
