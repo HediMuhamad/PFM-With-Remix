@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client"
 import categories from "../app/mocks/categories.js"
-import transactions from "../app/mocks/transactions"
-
-const db = new PrismaClient()
+import transactions from "../app/mocks/transactions.js"
+import { db } from "../app/utils/db.server.js"
 
 async function seedCategories() {
   await Promise.all(

@@ -1,4 +1,4 @@
-import { db } from "./db.server"
+import { db } from "../app/utils"
 
 export async function deleteOneCategory() {
   return await db.category.delete({
