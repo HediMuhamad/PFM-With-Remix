@@ -1,6 +1,9 @@
 {
   "private": true,
   "sideEffects": false,
+  "prisma": {
+    "seed": "node --require esbuild-register prisma/seed.js"
+  },
   "scripts": {
     "dev": "concurrently \"yarn public-assets:watch\" \"yarn svgrc:watch\" \"yarn sass:dev\" \"yarn remix dev\"",
     "svgrc": "npx @svgr/cli --out-dir app/shared/svgrc/ -- assets/app-assets/svgrc",
@@ -11,9 +14,13 @@
     "assets:build": "yarn svgrc && yarn public-assets",
     "sass:build": "sass styles/:app/styles",
     "build": "yarn assets:build && yarn sass:build && remix build",
-    "start": "remix-serve build"
+    "start": "remix-serve build",
+    "seed:db": "node --require esbuild-register prisma/seed.js",
+    "check:db": "node --require esbuild-register prisma/check.js",
+    "cont-check:db": "rm prisma/dev.db && npx prisma db push && yarn seed:db && yarn check:db"
   },
   "dependencies": {
+    "@prisma/client": "^4.8.1",
     "@remix-run/node": "^1.9.0",
     "@remix-run/react": "^1.9.0",
     "@remix-run/serve": "^1.9.0",
@@ -36,8 +43,10 @@
     "@svgr/plugin-svgo": "^6.5.1",
     "concurrently": "^7.6.0",
     "cpy-cli": "^4.2.0",
+    "esbuild-register": "^3.4.2",
     "eslint": "^8.31.0",
-    "npm-watch": "^0.11.0"
+    "npm-watch": "^0.11.0",
+    "prisma": "^4.8.1"
   },
   "engines": {
     "node": ">=14"
