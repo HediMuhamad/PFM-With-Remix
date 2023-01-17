@@ -2,24 +2,26 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "dev": "concurrently \"yarn assets:dev\" \"yarn sass:dev\" \"yarn remix dev\"",
-    "assets": "npx @svgr/cli --out-dir app/shared/assets/ -- assets",
-    "assets:watch": "npm-watch assets",
-    "assets:dev": "concurrently --hide \"yarn assets\" \"yarn assets:watch\"",
+    "dev": "concurrently \"yarn public-assets:watch\" \"yarn svgrc:watch\" \"yarn sass:dev\" \"yarn remix dev\"",
+    "svgrc": "npx @svgr/cli --out-dir app/shared/svgrc/ -- assets/app-assets/svgrc",
+    "svgrc:watch": "npm-watch svgrc",
+    "public-assets": "cpy 'assets/public-assets/**' 'public/' --dot",
+    "public-assets:watch": "npm-watch public-assets",
     "sass:dev": "sass -q --no-source-map --watch styles/:app/styles",
+    "assets:build": "yarn svgrc && yarn public-assets",
     "sass:build": "sass styles/:app/styles",
-    "build": "yarn sass:build && remix build",
+    "build": "yarn assets:build && yarn sass:build && remix build",
     "start": "remix-serve build"
   },
   "dependencies": {
     "@remix-run/node": "^1.9.0",
     "@remix-run/react": "^1.9.0",
     "@remix-run/serve": "^1.9.0",
-    "concurrently": "^7.6.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
     "isbot": "^3.6.5",
+    "node-watch": "^0.7.3",
     "react": "^18.2.0",
     "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
@@ -32,6 +34,8 @@
     "@svgr/plugin-jsx": "^6.5.1",
     "@svgr/plugin-prettier": "^6.5.1",
     "@svgr/plugin-svgo": "^6.5.1",
+    "concurrently": "^7.6.0",
+    "cpy-cli": "^4.2.0",
     "eslint": "^8.31.0",
     "npm-watch": "^0.11.0"
   },
@@ -39,12 +43,18 @@
     "node": ">=14"
   },
   "watch": {
-    "assets": {
+    "svgrc": {
       "patterns": [
-        "assets"
+        "assets/app-assets/svgrc"
       ],
       "extensions": "svg",
-      "quiet": false
+      "quiet": true
+    },
+    "public-assets": {
+      "patterns": [
+        "assets/public-assets"
+      ],
+      "quiet": true
     }
   }
 }

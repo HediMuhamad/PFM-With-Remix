@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import { useCallback, useRef, useState } from "react"
 import { Calendar } from "react-date-range"
 import useOnClickAway from "~/hooks/useOnClickAway"
-import { Calender as CalenderIcon } from "~/shared/assets/"
+import { Calender as CalenderIcon } from "~/shared/svgrc/"
 
 export default function DatePicker({
   nameInForm,

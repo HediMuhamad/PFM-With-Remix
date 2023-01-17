@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import { SearchIcon } from "~/shared/assets/"
+import { SearchIcon } from "~/shared/svgrc"
 import Button from "../button"
 import { useRef } from "react"
 

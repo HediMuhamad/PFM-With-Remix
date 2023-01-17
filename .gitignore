@@ -5,4 +5,6 @@ node_modules
 /public/build
 .env
 /app/styles
-/app/shared/assets/
+/app/shared/svgrc
+/public/fonts
+/public/images

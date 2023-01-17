@@ -11,7 +11,7 @@ import {
   TechIcon,
   SportsIcon,
   UndefinedCategoryIcon,
-} from "~/shared/assets/"
+} from "~/shared/svgrc"
 import currencyFormatter from "~/utils/currency-formatter"
 
 const getDayName = (date) => {

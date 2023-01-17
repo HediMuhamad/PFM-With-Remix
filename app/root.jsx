@@ -10,7 +10,7 @@ import {
 } from "@remix-run/react"
 
 import rootStyles from "~/styles/root.css"
-import { AppLogo } from "./shared/assets"
+import { AppLogo } from "~/shared/svgrc"
 import { useMemo } from "react"
 
 /**
