@@ -12,7 +12,7 @@ import {
   SportsIcon,
   UndefinedCategoryIcon,
 } from "~/shared/svgrc"
-import currencyFormatter from "~/utils/currency-formatter"
+import currencyFormatter from "~/utils/format-currency"
 
 const getDayName = (date) => {
   switch (date.getDate()) {
@@ -61,10 +61,7 @@ export default function Transaction({
   }, [transactionCategory])
 
   const formatedTransactionAmount = useMemo(() => {
-    return currencyFormatter(+transactionAmount, {
-      useAbbreviation: true,
-      symbol: "$",
-    })
+    return currencyFormatter(+transactionAmount, 2, "$")
   }, [transactionAmount])
 
   const Icon = getIcon()
