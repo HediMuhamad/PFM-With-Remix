@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import { useCallback, useRef, useState } from "react"
 import useOnClickAway from "~/hooks/useOnClickAway"
-import { Checked, DownArrow } from "~/shared/assets/"
+import { Checked, DownArrow } from "~/shared/svgrc"
 
 export default function DropDown({
   nameInForm,

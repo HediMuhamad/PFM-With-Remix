@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import { CrossIcon } from "~/shared/assets"
+import { CrossIcon } from "~/shared/svgrc/ "
 
 export default function Modal({ headline, onCloseClickHandler, children }) {
   return (
