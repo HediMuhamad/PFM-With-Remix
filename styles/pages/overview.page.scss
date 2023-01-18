@@ -1,23 +1,57 @@
+@import "../colors";
+
 .overview-page {
   display: flex;
+  padding: 24px;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 20px;
-  min-width: 100%;
-  min-height: 100%;
-  text-align: center;
+  row-gap: 90px;
+  background-color: #e8e8e8;
 
-  code {
-    font-family: monospace;
-    background-color: rgba($color: #000000, $alpha: 0.1);
-    padding: 0 5px;
+  .overview-page__card-list {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+    column-gap: 32px;
   }
 
-  .form {
-    margin-top: 20px;
+  .overview-page__transaction-list {
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 18px;
+
+    .overview-page__transaction-list__header {
+      font-size: 22px;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    .overview-page__transaction-list__content {
+      display: flex;
+      flex-direction: column;
+      row-gap: 18px;
+      overflow-y: auto;
+      max-height: max-content;
+
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba($color: #333, $alpha: 0.5);
+        width: 5px;
+      }
+    }
+  }
+
+  .overview-page__button-list {
+    .overview-page__button-list__add-transaction-button {
+      float: right;
+    }
   }
 }

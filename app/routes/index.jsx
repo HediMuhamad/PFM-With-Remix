@@ -1,4 +1,4 @@
-import { Form, useLoaderData } from "@remix-run/react"
+import { useLoaderData } from "@remix-run/react"
 import { useCallback, useMemo, useState } from "react"
 import styles from "~/styles/pages/overview.page.css"
 import { db } from "~/utils/db.server"
@@ -15,6 +15,10 @@ import {
   validateDate,
   validateNote,
 } from "~/utils/validate.server"
+import Modal from "~/components/modal"
+import StatisticCard from "~/components/statistic-card"
+import Transaction from "~/components/transaction"
+import Button from "~/components/button"
 
 export const links = () => {
   return [{ rel: "stylesheet", href: styles }]
@@ -127,6 +131,7 @@ export const action = async ({ request }) => {
  */
 
 export default function Overview() {
+  //Loader Related
   const { transactions, categories, cardData } = useLoaderData()
   const { income, expense } = useMemo(() => {
     return cardData[0].type === "INCOME"
@@ -140,73 +145,82 @@ export default function Overview() {
         }
   }, [cardData])
 
+  //User Interface Related
   const [noteValue, setNoteValue] = useState("")
-  const noteValueChangedHandler = useCallback((e) => {
-    let newValue = e.target.value.replace(
-      all_space_newline_tab_verticaltab_from_start,
-      ""
-    )
-    newValue = newValue.length > 350 ? noteValue : newValue
-    setNoteValue(newValue)
-  }, [])
+  const [isModalShowed, setIsModalShowed] = useState(false)
 
-  //Codes below this comment will remove in the process of adding real User Interface
-  const [categoryValue, setCategoryValue] = useState([])
+  const noteValueChangedHandler = useCallback(
+    (e) => {
+      let newValue = e.target.value.replace(
+        all_space_newline_tab_verticaltab_from_start,
+        ""
+      )
+      newValue = newValue.length > 350 ? noteValue : newValue
+      setNoteValue(newValue)
+    },
+    [noteValue]
+  )
 
   return (
     <div className="overview-page">
-      <h1>This is Overview Page</h1>
-      <p>Backend data preview will be log to the browser console.</p>
-      <br />
-      <section>
-        <h3>
-          This is a simple form just for demonstrate
-          <br /> the <code>Add Submission</code> Form
-        </h3>
-        <Form method="POST" className="form" reloadDocument={false}>
-          {/* <select
-            name="category"
-            value={categoryValue}
-            multiple={true}
-            onChange={(e) => {
-              setCategoryValue([e.target.value])
-            }}
-          >
-            <option value={"SALARY"}>SALARY</option>
-            <option value={"LOAN"}>LOAN</option>
-            <option value={"GIFT"}>GIFT</option>
-            <option value={"TECH"}>TECH</option>
-            <option value={"FOOD"}>FOOD</option>
-            <option value={"BILLS"}>BILLS</option>
-            <option value={"SPORTS"}>SPORTS</option>
-            <option value={"HEALTH"}>HEALTH</option>
-            <option value={"CLOTHS"}>CLOTHS</option>
-          </select>
-          <input type={"date"} name="date" /> */}
-          <input
-            type={"hidden"}
-            name="category"
-            value={JSON.stringify(["SALARY"])}
-          />
-          <input
-            type={"hidden"}
-            name="date"
-            value={JSON.stringify(new Date().toString())}
-          />
-          <input type={"number"} min={0} name="amount" defaultValue={100} />
-          <textarea
-            name="note"
-            minLength={10}
-            maxLength={350}
-            value={noteValue}
-            onChange={noteValueChangedHandler}
-          />
-
-          <button type="submit">Submit</button>
-        </Form>
-      </section>
-
-      {/* {console.log({ transactions, categories, cardData: { income, expense } })} */}
+      {isModalShowed ? (
+        <Modal
+          onCloseClickHandler={() => {
+            setIsModalShowed(false)
+          }}
+          headline="Add Transaction"
+        ></Modal>
+      ) : (
+        ""
+      )}
+      <div className="overview-page__card-list">
+        <StatisticCard
+          statisticCardTitle="income"
+          key={"income"}
+          statisticCardAmount={income.total}
+          statisticCardVariant="info"
+        />
+        <StatisticCard
+          statisticCardTitle="balance"
+          key={"balance"}
+          statisticCardAmount={income.total - expense.total}
+          statisticCardVariant="secondary"
+        />
+        <StatisticCard
+          statisticCardTitle="expense"
+          key={"expense"}
+          statisticCardAmount={expense.total}
+          statisticCardVariant="danger"
+        />
+      </div>
+      <div className="overview-page__transaction-list">
+        <h1 className="overview-page__transaction-list__header">This Week</h1>
+        <div className="overview-page__transaction-list__content">
+          {transactions.map(({ id, note, amount, date, category }) => {
+            return (
+              <Transaction
+                key={id}
+                transactionCategory={category.name}
+                transactionType={category.type}
+                transactionTitle={note}
+                transactionAmount={amount}
+                transactionDate={new Date(date)}
+              />
+            )
+          })}
+        </div>
+      </div>
+      <div className="overview-page__button-list">
+        <Button
+          buttonVariant={"primary"}
+          buttonSize={"large"}
+          buttonType={"normal"}
+          className={"overview-page__button-list__add-transaction-button"}
+          onClick={() => setIsModalShowed(true)}
+        >
+          Add Transaction
+        </Button>
+      </div>
     </div>
   )
 }
