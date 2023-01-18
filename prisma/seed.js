@@ -18,6 +18,10 @@ async function seedTransactions() {
       })
       delete transaction.category
       transaction["categoryId"] = id
+      transaction["title"] =
+        transaction.note.length <= 55
+          ? transaction.note
+          : `${transaction.note.substring(0, 52)}...`
       return db.transaction.create({ data: transaction })
     })
   )
