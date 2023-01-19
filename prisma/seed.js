@@ -1,7 +1,7 @@
 import categories from "../app/mocks/categories.js"
 import transactions from "../app/mocks/transactions.js"
 import { db } from "../app/utils/db.server.js"
-import extractTitle from "titleFromNoteExtractor"
+import { extractTitle } from "../app/utils/extractors.server.js"
 
 async function seedCategories() {
   await Promise.all(
