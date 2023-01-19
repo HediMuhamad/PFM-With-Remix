@@ -1,4 +1,4 @@
-import { db } from "../app/utils"
+import { db } from "../app/utils/db.server"
 
 export async function deleteOneCategory() {
   return await db.category.delete({
@@ -74,6 +74,7 @@ export async function readManyTransaction() {
 }
 
 export async function addOneTransaction(
+  title = "Buying a new phone",
   note = "Buying a new phone",
   categoryId,
   date = new Date("10/4/2015"),
@@ -83,6 +84,7 @@ export async function addOneTransaction(
   categoryId = categoryId ? categoryId : id
   return await db.transaction.create({
     data: {
+      title,
       note,
       categoryId,
       date,
@@ -95,18 +97,21 @@ export async function addOneTransaction(
 export async function addManyTransaction(
   data = [
     {
+      title: "Buying a new phone",
       note: "Buying a new phone",
       category: "TECH",
       date: new Date("10/4/2015"),
       amount: 1_000,
     },
     {
+      title: "Peanut",
       note: "Peanut",
       category: "FOOD",
       date: new Date("8/2/1999"),
       amount: 10,
     },
     {
+      title: "Birthday Gift",
       note: "Birthday Gift",
       category: "GIFT",
       date: new Date(),

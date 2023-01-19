@@ -16,6 +16,7 @@
     "build": "yarn assets:build && yarn sass:build && remix build",
     "start": "remix-serve build",
     "seed:db": "node --require esbuild-register prisma/seed.js",
+    "clear:db": "node --require esbuild-register prisma/clear.js",
     "check:db": "node --require esbuild-register prisma/check.js",
     "cont-check:db": "rm prisma/dev.db && npx prisma db push && yarn seed:db && yarn check:db"
   },
