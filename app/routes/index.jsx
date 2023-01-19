@@ -62,7 +62,7 @@ export const loader = async () => {
   const categories = await db.category.findMany()
 
   const cardData =
-    await db.$queryRaw`SELECT type, sum(amount) as total FROM "Transaction" INNER JOIN "Category" ON "Transaction".categoryId = "Category".id GROUP BY type`
+    await db.$queryRaw`SELECT type, sum(amount) as total FROM "Transaction" INNER JOIN "Category" ON "Transaction"."categoryId" = "Category"."id" GROUP BY type`
 
   return succeedResponse({ transactions, categories, cardData })
 }
