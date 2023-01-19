@@ -41,10 +41,26 @@
     position: absolute;
     box-sizing: border-box;
     width: 100%;
+    height: 250px;
     list-style: none;
     border-radius: 7px;
     background-color: $white;
-    overflow: hidden;
+    overflow: auto;
+
+    -ms-overflow-style: none;
+    scrollbar-width: 5px;
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba($color: #333, $alpha: 0.5);
+      width: 5px;
+    }
   }
 
   .drop-down__list__option {
