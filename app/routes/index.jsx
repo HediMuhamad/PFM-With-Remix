@@ -1,6 +1,8 @@
-import { useLoaderData } from "@remix-run/react"
+import PropTypes from "prop-types"
+import { Form, useLoaderData, useTransition } from "@remix-run/react"
 import { useCallback, useMemo, useState } from "react"
-import styles from "~/styles/pages/overview.page.css"
+import overviewStyle from "~/styles/pages/overview.page.css"
+import overviewModalStyle from "~/styles/pages/overview.modal.css"
 import { db } from "~/utils/db.server"
 import {
   badRequest,
@@ -8,7 +10,11 @@ import {
   succeedResponse,
 } from "~/utils/http-statuses.server"
 import { all_space_newline_tab_verticaltab_from_start } from "~/utils/regexes"
-import extractTitle from "~/utils/title-from-note-extractor"
+import {
+  extractTitle,
+  extractCategory,
+  extractDate,
+} from "~/utils/extractors.server"
 import {
   validateAmount,
   validateCategory,
@@ -19,9 +25,15 @@ import Modal from "~/components/modal"
 import StatisticCard from "~/components/statistic-card"
 import Transaction from "~/components/transaction"
 import Button from "~/components/button"
+import DropDown from "~/components/drop-down"
+import DatePicker from "~/components/date-picker"
+import CurrencyInput from "~/components/currency-input"
 
 export const links = () => {
-  return [{ rel: "stylesheet", href: styles }]
+  return [
+    { rel: "stylesheet", href: overviewStyle },
+    { rel: "stylesheet", href: overviewModalStyle },
+  ]
 }
 
 /*
@@ -70,13 +82,13 @@ export const loader = async () => {
 export const action = async ({ request }) => {
   const formData = await request.formData()
   const fields = Object.fromEntries(formData)
-  const category = JSON.parse(fields.category)[0]
-  const date = new Date(JSON.parse(fields.date))
+  const category = extractCategory(fields.category)
+  const date = extractDate(fields.date)
   const amount = +fields.amount
-  const note = fields.note.replace(
-    all_space_newline_tab_verticaltab_from_start,
-    ""
-  )
+  const note =
+    typeof fields.note == "string"
+      ? fields.note.replace(all_space_newline_tab_verticaltab_from_start, "")
+      : `A transaction in ${date ? date.toLocaleDateString() : null}`
   const title = extractTitle(note.split("\n")[0])
 
   const fieldErrors = {
@@ -130,6 +142,156 @@ export const action = async ({ request }) => {
  *
  */
 
+function ModalContent({ categories, onDismissClicked }) {
+  const transition = useTransition()
+  const [formCategoryType, setFormCategoryType] = useState("INCOME")
+  const [selectedCategory, setSelectedCategory] = useState([])
+  const [formDate, setFormDate] = useState(null)
+  const [formAmount, setFormAmount] = useState(0)
+  const [noteValue, setNoteValue] = useState("")
+
+  categories = useMemo(
+    () =>
+      categories.map((item) => {
+        item.disabled = item.type !== formCategoryType
+        return item
+      }),
+    [categories, formCategoryType]
+  )
+
+  const toggleOptionHandler = useCallback((key) => {
+    setSelectedCategory([key])
+  }, [])
+
+  const radioButtonClickHandler = useCallback(
+    (e) => {
+      setFormCategoryType(e.target.value)
+      setSelectedCategory([])
+    },
+    [setFormCategoryType]
+  )
+
+  const noteValueChangedHandler = useCallback(
+    (e) => {
+      let newValue = e.target.value.replace(
+        all_space_newline_tab_verticaltab_from_start,
+        ""
+      )
+      newValue = newValue.length > 350 ? noteValue : newValue
+      setNoteValue(newValue)
+    },
+    [noteValue]
+  )
+
+  return (
+    <Form method="POST" className="form">
+      <div>
+        <label htmlFor="drop-down">Category</label>
+        <DropDown
+          nameInForm="category"
+          dropDownOptions={categories}
+          dropDownSelectedOptions={selectedCategory}
+          dropDownToggleOptions={toggleOptionHandler}
+        />
+      </div>
+      <div>
+        <label htmlFor="date-picker">Date</label>
+        <DatePicker
+          datePickerDate={formDate}
+          nameInForm="date"
+          datePickerLabel="date"
+          datePickerMaxDate={new Date()}
+          datePickerOnAnOptionSelected={setFormDate}
+        />
+      </div>
+      <div>
+        <label htmlFor="amount">Amount</label>
+        <CurrencyInput
+          name="amount"
+          currencyInputValue={formAmount + ""}
+          currencyInputValueChangeHandler={(e) => {
+            setFormAmount(e.target.value)
+          }}
+        />
+      </div>
+      <div>
+        <label htmlFor="types">Type</label>
+        <div className="form__type-radio-group">
+          <span className="form__type-radio-group__radio">
+            <input
+              type="radio"
+              name="type"
+              value="INCOME"
+              id="income"
+              checked={formCategoryType == "INCOME"}
+              onChange={() => {}}
+              onClick={radioButtonClickHandler}
+            />
+            <label htmlFor="income">income</label>
+          </span>
+          <span className="form__type-radio-group__radio">
+            <input
+              type="radio"
+              name="type"
+              value="EXPENSE"
+              id="expense"
+              onChange={() => {}}
+              checked={formCategoryType == "EXPENSE"}
+              onClick={radioButtonClickHandler}
+            />
+            <label htmlFor="expense">expense</label>
+          </span>
+        </div>
+      </div>
+      <div className="form__note-container">
+        <label htmlFor="note">Note</label>
+        <textarea
+          name="note"
+          value={noteValue}
+          onChange={noteValueChangedHandler}
+          className="form__note-container__textarea"
+        ></textarea>
+      </div>
+
+      <div className="form__button-list">
+        <Button
+          variant={"dark"}
+          size={"large"}
+          buttonType={"ghost"}
+          onClick={onDismissClicked}
+        >
+          Dismiss
+        </Button>
+        <Button
+          variant={"primary"}
+          size={"large"}
+          buttonType={"normal"}
+          type={"submit"}
+          className={"form__button-list__submit-button"}
+        >
+          {transition.state === "submitting"
+            ? "Saving..."
+            : transition.state === "loading"
+            ? "Saved!"
+            : "Add Transaction"}
+        </Button>
+      </div>
+    </Form>
+  )
+}
+
+/*
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
 export default function Overview() {
   //Loader Related
   const { transactions, categories, cardData } = useLoaderData()
@@ -145,21 +307,7 @@ export default function Overview() {
         }
   }, [cardData])
 
-  //User Interface Related
-  const [noteValue, setNoteValue] = useState("")
   const [isModalShowed, setIsModalShowed] = useState(false)
-
-  const noteValueChangedHandler = useCallback(
-    (e) => {
-      let newValue = e.target.value.replace(
-        all_space_newline_tab_verticaltab_from_start,
-        ""
-      )
-      newValue = newValue.length > 350 ? noteValue : newValue
-      setNoteValue(newValue)
-    },
-    [noteValue]
-  )
 
   return (
     <div className="overview-page">
@@ -169,7 +317,14 @@ export default function Overview() {
             setIsModalShowed(false)
           }}
           headline="Add Transaction"
-        ></Modal>
+        >
+          <ModalContent
+            categories={categories}
+            onDismissClicked={() => {
+              setIsModalShowed(false)
+            }}
+          />
+        </Modal>
       ) : (
         ""
       )}
@@ -223,4 +378,25 @@ export default function Overview() {
       </div>
     </div>
   )
+}
+
+/*
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+
+ModalContent.propTypes = {
+  categories: PropTypes.object.isRequired,
+  onDismissClicked: PropTypes.func,
+}
+
+ModalContent.defaultProps = {
+  onDismissClicked: () => {},
 }
