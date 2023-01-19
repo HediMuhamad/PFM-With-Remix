@@ -1,6 +1,7 @@
 import categories from "../app/mocks/categories.js"
 import transactions from "../app/mocks/transactions.js"
 import { db } from "../app/utils/db.server.js"
+import extractTitle from "titleFromNoteExtractor"
 
 async function seedCategories() {
   await Promise.all(
@@ -18,10 +19,7 @@ async function seedTransactions() {
       })
       delete transaction.category
       transaction["categoryId"] = id
-      transaction["title"] =
-        transaction.note.length <= 55
-          ? transaction.note
-          : `${transaction.note.substring(0, 52)}...`
+      transaction["title"] = extractTitle(transaction.note)
       return db.transaction.create({ data: transaction })
     })
   )

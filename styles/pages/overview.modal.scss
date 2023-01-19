@@ -1,0 +1,65 @@
+@import "../colors";
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 2fr 6fr 1fr;
+  column-gap: 50px;
+  row-gap: 50px;
+  font-size: 16px;
+  padding: 25px;
+
+  input {
+    font-size: 16px;
+  }
+
+  > * {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+
+    > * {
+      width: auto;
+    }
+  }
+
+  .form__type-radio-group {
+    display: flex;
+    column-gap: 20px;
+
+    .form__type-radio-group__radio {
+      display: flex;
+      column-gap: 5px;
+      text-transform: capitalize;
+    }
+  }
+
+  .form__note-container {
+    width: 100%;
+    height: 100%;
+    grid-column: 2 / 4;
+
+    .form__note-container__textarea {
+      width: 100%;
+      height: 100%;
+      border-radius: 7px;
+      resize: none;
+      padding: 15px;
+    }
+  }
+
+  .form__button-list {
+    grid-column: 1 / 4;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    column-gap: 20px;
+
+    .form__button-list__submit-button {
+      width: 200px;
+    }
+  }
+}

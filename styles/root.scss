@@ -54,5 +54,19 @@ body {
 
   & .main {
     background-color: $white;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba($color: #333, $alpha: 0.5);
+      width: 5px;
+    }
   }
 }
