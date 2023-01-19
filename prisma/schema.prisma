@@ -22,4 +22,5 @@ model Transaction {
   categoryId String
   amount     Float
   date       DateTime @default(now())
+  createdAt  DateTime @default(now())
 }
