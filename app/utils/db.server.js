@@ -1,24 +1,14 @@
 import { PrismaClient } from "@prisma/client"
 
-const dbGenerator = (function () {
-  let instance = undefined
+let db
 
-  return {
-    getInstance: function () {
-      if (process.env.NODE_ENV === "production") {
-        instance = new PrismaClient()
-        return instance
-      } else {
-        if (!instance) {
-          instance = new PrismaClient()
-          delete instance.constructor
-        }
-        return instance
-      }
-    },
+if (process.env.NODE_ENV === "production") {
+  db = new PrismaClient()
+} else {
+  if (!global.db) {
+    global.db = new PrismaClient()
   }
-})()
-
-const db = dbGenerator.getInstance()
+  db = global.db
+}
 
 export { db }
